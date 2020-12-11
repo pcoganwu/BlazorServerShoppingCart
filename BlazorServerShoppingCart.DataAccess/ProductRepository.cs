@@ -37,7 +37,7 @@ namespace BlazorServerShoppingCart.DataAccess
 
         public async Task<IList<Product>> GetAllProducts()
         {
-            return await _appDbContext.Products.ToListAsync();
+            return await _appDbContext.Products.Include(c => c.Category).ToListAsync();
         }
 
         public async Task<Product> GetProduct(string productId)
@@ -47,7 +47,7 @@ namespace BlazorServerShoppingCart.DataAccess
 
         public async Task<Product> UpdateProduct(Product updatedProduct)
         {
-            var product = await _appDbContext.Products.Include(c => c.Category).FirstOrDefaultAsync(p => p.ProductId == updatedProduct.ProductId);
+            var product = await _appDbContext.Products.FirstOrDefaultAsync(p => p.ProductId == updatedProduct.ProductId);
             if (product != null)
             {
                 product.Name = updatedProduct.Name;

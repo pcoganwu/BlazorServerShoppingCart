@@ -1,7 +1,10 @@
+using BlazorServerShoppingCart.DataAccess;
+using BlazorServerShoppingCart.Models.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,11 +30,24 @@ namespace BlazorServerShoppingCart.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            }); 
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BlazorServerShoppingCart.API", Version = "v1" });
             });
+
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IInvoiceDataRepository, InvoiceDataRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            services.AddScoped<ILineItemRepository, LineItemRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IStateRepository, StateRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
