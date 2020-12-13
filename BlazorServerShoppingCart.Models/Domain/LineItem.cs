@@ -16,7 +16,7 @@ namespace BlazorServerShoppingCart.Models.Domain
         public decimal UnitPrice { get; set; }
         [Required]
         public int Quantity { get; set; }
-        public decimal? Extension { get { return UnitPrice* Quantity; }}
+        public decimal? Extension { get; set; }
 
         public virtual Invoice InvoiceNumberNavigation { get; set; }
         public virtual Product Product { get; set; }
