@@ -1,0 +1,39 @@
+﻿@page "/products/productDetails/{productId}"
+@inherits ProductDetailsBase
+
+@{
+    var photoPath = "images/products/" + (Product.ImageFile ?? "noimage.jpg");
+}
+
+@if (Product is null)
+{
+    <p>
+        Loading ...
+    </p>
+}
+else
+{
+    <h3 class="text-center" style="width:auto">Product Details for @Product.ShortDescription</h3>
+    <hr />
+
+    <div class="col-md-8 text-center divCenter">
+        <div class="card">
+            <div class="card-header">
+                <h4>@Product.ShortDescription</h4>
+            </div>
+            <div class="card-body">
+                <img src="@photoPath" class="card-img-top img-thumbnail imageThumbnail" />
+
+                <h6 class="mt-2"><b>Description: </b>@Product.LongDescription</h6>
+                <h6><b>Category: </b>@(Product.Category is null ? "No Category" : Product.Category.ShortName)</h6>
+                <h6><b>Unit Price: </b>@Product.UnitPrice.ToString("c")</h6>
+                <h6><b>On Hand: </b>@Product.OnHand</h6>
+            </div>
+            <div class="card-footer">
+                <a href="/" class="btn btn-primary">Back</a>
+                <a href="@($"/products/editproduct/{Product.ProductId}")" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-primary" style="width:auto">Shop Item</a>
+            </div>
+        </div>
+    </div>
+}
