@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServerShoppingCart.AP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServerShoppingCart.Models", "BlazorServerShoppingCart.Models\BlazorServerShoppingCart.Models.csproj", "{5C2B143C-6CC2-4D7C-A56F-DE3A1114DDE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServerShoppingCart.DataAccess", "BlazorServerShoppingCart.DataAccess\BlazorServerShoppingCart.DataAccess.csproj", "{4D18E25F-1E44-4331-B711-FA9669AB47D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServerShoppingCart.DataAccess", "BlazorServerShoppingCart.DataAccess\BlazorServerShoppingCart.DataAccess.csproj", "{4D18E25F-1E44-4331-B711-FA9669AB47D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
