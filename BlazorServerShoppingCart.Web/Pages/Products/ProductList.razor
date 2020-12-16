@@ -38,7 +38,7 @@ else
                     <td>@product.ShortDescription</td>
                     <td>@product.LongDescription</td>
                     <td>@product.Category.ShortName</td>
-                    <td>@product.UnitPrice</td>
+                    <td>@product.UnitPrice.ToString("c")</td>
                     <td>@product.OnHand</td>
                     <td>
                         <a href="@($"/products/productdetails/{product.ProductId}")">Detail</a>
