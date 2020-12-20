@@ -13,6 +13,8 @@ namespace BlazorServerShoppingCart.Web.ViewModels
     {
         private readonly HttpClient _httpClient;
 
+        public Product Product { get; set; } = new();
+
         public ProductViewModel()
         { }
 
@@ -37,7 +39,7 @@ namespace BlazorServerShoppingCart.Web.ViewModels
         public decimal UnitPrice { get; set; }
         [Required, Display(Name = "On Hand")]
         public int OnHand { get; set; }
-        [Required]
+        [Required, Range(1, 500)]
         public int? Quantity { get; set; }
 
         public Category Category { get; set; }
@@ -68,6 +70,26 @@ namespace BlazorServerShoppingCart.Web.ViewModels
             return await _httpClient.PutJsonAsync<Product>($"api/products", product);
         }
 
+        public async Task<ProductViewModel> GetOrderProduct(string productId)
+        {
+            Product = await this.GetProduct(productId);
+            return LoadCurrentObject(Product);
+        }
+
+        private ProductViewModel LoadCurrentObject(ProductViewModel productViewModel)
+        {
+            ProductId = productViewModel.ProductId;
+            Name = productViewModel.Name;
+            ShortDescription = productViewModel.ShortDescription;
+            LongDescription = productViewModel.LongDescription;
+            CategoryId = productViewModel.CategoryId;
+           ImageFile = productViewModel.ImageFile;
+            UnitPrice = productViewModel.UnitPrice;
+            OnHand = productViewModel.OnHand;
+            Category = productViewModel.Category;
+
+            return productViewModel;
+        }
 
         //Mapping ProductViewModel to Product from the database
         public static implicit operator ProductViewModel(Product product)
