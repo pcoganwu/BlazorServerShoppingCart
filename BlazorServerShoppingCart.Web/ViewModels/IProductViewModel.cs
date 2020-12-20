@@ -27,5 +27,6 @@ namespace BlazorServerShoppingCart.Web.ViewModels
         Task<Product> AddProduct(Product product);
         Task<Product> UpdateProduct(Product product);
         Task DeleteProduct(string productId);
+        Task<ProductViewModel> GetOrderProduct(string productId);
     }
 }
