@@ -29,6 +29,7 @@ namespace BlazorServerShoppingCart.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            
 
             services.AddHttpClient<IProductViewModel, ProductViewModel>(client =>
             {

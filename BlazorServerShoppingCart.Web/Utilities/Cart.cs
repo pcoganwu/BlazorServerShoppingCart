@@ -9,6 +9,8 @@ namespace BlazorServerShoppingCart.Web.Utilities
     {
         public List<ProductsItem> Items { get; set; } = new();
 
+
+        //This is the running total cost of items in a Cart
         public decimal Total
         {
             get 
@@ -16,16 +18,19 @@ namespace BlazorServerShoppingCart.Web.Utilities
                 decimal total = 0.0m;
                 foreach(var item in Items)
                 {
-                    total += item.Total;
+                    total += item.Cost;
                 }
                 return total;
             }
         }
 
         //To check the last time localStorage was accessed
-        public DateTime LastAccessed { get; set; }
+        //whenever the Cart is persisted to the storage, the last accessed time is saved.
+        public DateTime LastTimeSaved { get; set; }
 
         //Time in minutes to persist the cart in localStorage (cart has expired)
-        public int TimeToLiveInMinutes { get; set; } = 5; // default
+        //When loading the cart from local storage, a check is made to see if the cart
+        //has expired based on LastTimeSaved and LengthOfTimeInStorage properties.
+        public int LengthOfTimeInStorage { get; set; } = 5; // default
     }
 }

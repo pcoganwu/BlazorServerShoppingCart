@@ -8,13 +8,8 @@ namespace BlazorServerShoppingCart.Web.Utilities
 {
     public class ProductsItem
     {
-        private readonly IProductViewModel productViewModel;
+        public ProductViewModel ProductViewModel { get; set; } = new();
 
-        public ProductsItem(IProductViewModel productViewModel)
-        {
-            this.productViewModel = productViewModel;
-        }
-
-        public decimal Total { get { return productViewModel.UnitPrice * (int)productViewModel.Quantity; } }
+        public decimal Cost { get { return ProductViewModel.UnitPrice * (int)ProductViewModel.Quantity; } }
     }
 }

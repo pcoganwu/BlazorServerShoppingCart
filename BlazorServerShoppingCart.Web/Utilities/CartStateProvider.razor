@@ -1,0 +1,12 @@
+﻿@inherits CartStateProviderBase
+
+@if (hasLoaded)
+{
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
+}
+else
+{
+    <div class="spinner"></div>
+}
