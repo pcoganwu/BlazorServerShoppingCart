@@ -13,7 +13,7 @@
 }
 else
 {
-    <h3 class="text-center" style="width:auto">Product Details for @Product.ShortDescription</h3>
+    <h3 class="text-center mt-5" style="width:auto">Product Details for @Product.ShortDescription</h3>
     <hr />
 
     <div class="col-md-8 text-center divCenter">
@@ -30,9 +30,9 @@ else
                 <h6><b>On Hand: </b>@Product.OnHand</h6>
             </div>
             <div class="card-footer">
-                <a href="/" class="btn btn-primary">Back</a>
-                <a href="@($"/products/editproduct/{Product.ProductId}")" class="btn btn-primary">Edit</a>
-                <a href="@($"/products/order/{Product.ProductId}")" class="btn btn-primary" style="width:auto">Shop Item</a>
+                <a href="/" class="btn btn-primary" style="width:100px">Back</a>
+                <a href="@($"/products/editproduct/{Product.ProductId}")" class="btn btn-primary" style="width:100px">Edit</a>
+                <a href="@($"/products/order/{Product.ProductId}")" class="btn btn-primary" style="width:100px">Shop Item</a>
             </div>
         </div>
     </div>

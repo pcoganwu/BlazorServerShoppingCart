@@ -1,4 +1,44 @@
-﻿@page "/cartItem/{productId}/{quantity:int}"
+﻿@page "/cartItem/{productId}/{quantity:int?}"
 @inherits CartItemBase
 
-<h3>@ProductId @Quantity</h3>
+<h3 class="text-center">Your Shooping Cart</h3>
+
+@if (CartStateProvider.ShoppingCart.Items is not null && CartStateProvider.ShoppingCart.Items.Count > 0)
+{
+    <div class="mt-5">
+        <EditForm Model="CartStateProvider">
+            <div class="row">
+                <div class="col-md-5">
+                    <InputSelect @bind-Value="ProductId" size="10" style="width:400px" class="form-control">
+                        @foreach (var item in CartStateProvider.ShoppingCart.Items)
+                            {
+                            <option selected value="@item.ProductViewModel.ProductId">
+                                @($"{item.ProductViewModel.Name} ({item.ProductViewModel.Quantity}" +
+                                $" at {item.ProductViewModel.UnitPrice.ToString("c")})")
+                            </option>
+                            }
+                    </InputSelect>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <button type="button" class="btn btn-primary" style="width:130px" @onclick="RemoveItemAsync">Remove Item</button>
+                    </div>
+                    <div class="mt-3">
+                        <button type="button" class="btn btn-primary" style="width:130px" @onclick="ClearCartAsync">Empty Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2">
+                <a href="/" class="btn btn-primary" style="width: 170px">Continue Shopping</a>
+                <a href="/checkout" class="btn btn-primary" style="width: 170px">Check Out</a>
+            </div>
+        </EditForm>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <h4 class="text-danger"><b>@Text</b></h4>
+        <a href="/" class="btn btn-primary" style="width:auto">Continue Shopping</a>
+    </div>
+}
