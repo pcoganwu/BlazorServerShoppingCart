@@ -39,6 +39,14 @@ namespace BlazorServerShoppingCart.Web
             {
                 client.BaseAddress = new Uri("https://localhost:44398/");
             });
+            services.AddHttpClient<ICustomerViewModel, CustomerViewModel>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:44398/");
+            });
+            services.AddHttpClient<IInvoiceDataViewModel, InvoiceDataViewModel>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:44398/");
+            });
 
             services.AddSingleton<IFileUpload, FileUpload>();
         }

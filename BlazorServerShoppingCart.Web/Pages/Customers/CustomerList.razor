@@ -1,0 +1,43 @@
+﻿@page "/customers/customerList"
+@inherits CustomerListBase
+
+@if (Customers == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <h3 class="text-center mt-3 mb-3">Customer List</h3>
+    <hr />
+    <div class="mb-5 mt-5">
+        <a href="#" class="btn btn-primary" style="width:auto">Add a New Customer</a>
+    </div>
+    <TableTemplate Items="Customers">
+        <TableHeader>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip Code</th>
+            <th>Phone Number</th>
+            <th></th>
+        </TableHeader>
+        <RowTemplate Context="customer">
+            <td>@customer.Email</td>
+            <td>@customer.FirstName</td>
+            <td>@customer.LastName</td>
+            <td>@customer.Address</td>
+            <td>@customer.City</td>
+            <td>@customer.StateNavigation.StateName</td>
+            <td>@customer.ZipCode</td>
+            <td>@customer.PhoneNumber</td>
+            <td>
+                <a href="#">Detail</a>
+                <a href="#">Edit</a>
+                <a href="#">Delete</a>
+            </td>
+        </RowTemplate>
+    </TableTemplate>
+}
