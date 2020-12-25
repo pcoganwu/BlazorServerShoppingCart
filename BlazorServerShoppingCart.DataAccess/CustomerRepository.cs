@@ -39,12 +39,12 @@ namespace BlazorServerShoppingCart.DataAccess
 
         public async Task<IList<Customer>> GetAllCustomers()
         {
-            return await _appDbContext.Customers.ToListAsync();
+            return await _appDbContext.Customers.Include(s => s.StateNavigation).ToListAsync();
         }
 
         public async Task<Customer> GetCustomer(string email)
         {
-            return await _appDbContext.Customers.FirstOrDefaultAsync(c => c.Email == email);
+            return await _appDbContext.Customers.Include(s => s.StateNavigation).FirstOrDefaultAsync(c => c.Email == email);
         }
 
         public async Task<Customer> UpdateCustomer(Customer updatedCustomer)

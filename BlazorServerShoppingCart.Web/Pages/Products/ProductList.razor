@@ -3,9 +3,7 @@
 
 @if (Products is null)
 {
-    <p>
-        Loading ...
-    </p>
+   <div class="spinner"></div>
 }
 else
 {
@@ -14,40 +12,35 @@ else
     <div class="mb-5 mt-5">
         <a href="/products/editproduct" class="btn btn-primary" style="width:auto">Add a New Product</a>
     </div>
-    <table class="table table-hover table-responsive" style="font-family:Verdana; font-size:11px">
-        <thead class="thead-light text-center">
-            <tr>
-                <td>Photo</td>
-                <td>Name</td>
-                <td>Short Description</td>
-                <td>Long Description</td>
-                <td>Category</td>
-                <td>Unit Price</td>
-                <td>On Hand</td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            <Virtualize Items="Products" Context="product">
-                <tr>
-                    @{
-                        var photoPath = "images/products/" + (product.ImageFile ?? "noimage.jpg");
-                    }
-                    <td style="height:80px; width:80px"><img src="@photoPath" class="img-thumbnail" /></td>
-                    <td>@product.Name</td>
-                    <td>@product.ShortDescription</td>
-                    <td>@product.LongDescription</td>
-                    <td>@product.Category.ShortName</td>
-                    <td>@product.UnitPrice.ToString("c")</td>
-                    <td>@product.OnHand</td>
-                    <td>
-                        <a href="@($"/products/productdetails/{product.ProductId}")">Detail</a>
-                        <a href="@($"/products/editproduct/{product.ProductId}")">Edit</a>
-                        <a href="@($"/products/deleteproduct/{product.ProductId}")">Delete</a>
-                        <a href="@($"/products/order/{product.ProductId}")">Order</a>
-                    </td>
-                </tr>
-            </Virtualize>
-        </tbody>
-    </table>
+
+    <TableTemplate Items="Products">
+        <TableHeader>
+            <td>Photo</td>
+            <td>Name</td>
+            <td>Short Description</td>
+            <td>Long Description</td>
+            <td>Category</td>
+            <td>Unit Price</td>
+            <td>On Hand</td>
+            <td></td>
+        </TableHeader>
+        <RowTemplate Context="product">
+            @{
+                    var photoPath = "images/products/" + (product.ImageFile ?? "noimage.jpg");
+            }
+            <td style="height:80px; width:80px"><img src="@photoPath" class="img-thumbnail" /></td>
+            <td>@product.Name</td>
+            <td>@product.ShortDescription</td>
+            <td>@product.LongDescription</td>
+            <td>@product.Category.ShortName</td>
+            <td>@product.UnitPrice.ToString("c")</td>
+            <td>@product.OnHand</td>
+            <td>
+                <a href="@($"/products/productdetails/{product.ProductId}")">Detail</a>
+                <a href="@($"/products/editproduct/{product.ProductId}")">Edit</a>
+                <a href="@($"/products/deleteproduct/{product.ProductId}")">Delete</a>
+                <a href="@($"/products/order/{product.ProductId}")">Order</a>
+            </td>
+        </RowTemplate>
+    </TableTemplate>
 }

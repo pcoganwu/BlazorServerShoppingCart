@@ -1,0 +1,35 @@
+﻿@typeparam TItem
+
+<table class="table table-hover table-responsive" style="font-family:Verdana; font-size:11px">
+    <thead>
+        <tr>
+            @TableHeader
+        </tr>
+    </thead>
+    <tbody>
+        @*@foreach(TItem item in Items)
+        {
+        <tr>
+            @RowTemplate(item)
+        </tr>
+        }*@
+        <Virtualize Items="Items" Context="item">
+            <tr>
+                @RowTemplate(item)
+            </tr>
+        </Virtualize>
+    </tbody>
+</table>
+
+@code {
+
+    [Parameter]
+    public RenderFragment TableHeader { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> RowTemplate { get; set; }
+
+    [Parameter]
+    public IList<TItem> Items { get; set; }
+
+}

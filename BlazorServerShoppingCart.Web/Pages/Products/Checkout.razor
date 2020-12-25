@@ -1,0 +1,48 @@
+﻿@page "/products/checkout"
+@inherits CheckoutBase
+
+<h3 class="text-center mt-3 mb-3">You Purchase</h3>
+<hr />
+
+@if (TAX == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    @foreach (var tax in TAX)
+    {
+        <TableTemplate Items="CartStateProvider.ShoppingCart.Items">
+            <TableHeader>
+                <th>Name</th>
+                <th>Short Description</th>
+                <th>Long Description</th>
+                <th>Category</th>
+                <th>Photo</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Tax</th>
+                <th>Sub Total</th>
+            </TableHeader>
+            <RowTemplate Context="item">
+                @{
+                            var photoPath = "images/products/" + (item.ProductViewModel.ImageFile ?? "noimage.jpg");
+                }
+
+                <td>@item.ProductViewModel.Name</td>
+                <td>@item.ProductViewModel.ShortDescription</td>
+                <td>@item.ProductViewModel.LongDescription</td>
+                <td>@item.ProductViewModel.Category.ShortName</td>
+                <td><img src="@photoPath" width="80" height="70" /></td>
+                <td>@item.ProductViewModel.UnitPrice.ToString("c")</td>
+                <td>@item.ProductViewModel.Quantity</td>
+                <td>@((item.Cost * tax.SalesTax).ToString("c"))</td>
+                <td>@((item.Cost * (1 + tax.SalesTax)).ToString("c"))</td>
+            </RowTemplate>
+        </TableTemplate>
+        <div>
+            <h5 class="float-md-right">Total: @((CartStateProvider.ShoppingCart.Total * (1 + tax.SalesTax)).ToString("c"))</h5>
+        </div>
+    }
+}
+
