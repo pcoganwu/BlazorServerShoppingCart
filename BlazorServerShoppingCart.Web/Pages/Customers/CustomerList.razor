@@ -1,4 +1,4 @@
-﻿@page "/customers/customerList"
+﻿@page "/customers/customerList/{customerAdded?}"
 @inherits CustomerListBase
 
 @if (Customers == null)
@@ -8,9 +8,10 @@
 else
 {
     <h3 class="text-center mt-3 mb-3">Customer List</h3>
+    <h3 class="text-center text-primary"><b>@CustomerAdded</b></h3>
     <hr />
     <div class="mb-5 mt-5">
-        <a href="#" class="btn btn-primary" style="width:auto">Add a New Customer</a>
+        <a href="/customers/editCustomer" class="btn btn-primary" style="width:auto">Add a New Customer</a>
     </div>
     <TableTemplate Items="Customers">
         <TableHeader>
@@ -34,9 +35,9 @@ else
             <td>@customer.ZipCode</td>
             <td>@customer.PhoneNumber</td>
             <td>
-                <a href="#">Detail</a>
-                <a href="#">Edit</a>
-                <a href="#">Delete</a>
+                <a href="@($"/customers/customerDetail/{customer.Email}")">Detail</a>
+                <a href="@($"/customers/editcustomer/{customer.Email}")">Edit</a>
+                <a href="@($"/customers/deletecustomer/{customer.Email}")">Delete</a>
             </td>
         </RowTemplate>
     </TableTemplate>

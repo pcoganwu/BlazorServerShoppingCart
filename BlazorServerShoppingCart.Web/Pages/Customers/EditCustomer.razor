@@ -1,0 +1,98 @@
+﻿@page "/customers/editcustomer/{email?}"
+@inherits EditCustomerBase
+
+<h3 class="text-center text-primary mt-4">@PageTitle</h3>
+
+<EditForm Model="Customer" OnValidSubmit="Handle_SubmitAsync">
+    <DataAnnotationsValidator />
+    <div class="form-group row">
+        <label for="email" class="col-md-2 col-form-label">
+            Email Address:
+        </label>
+        <div class="col-md-8">
+            @if (Email == null)
+            {
+                <InputText id="email" @bind-Value="Customer.Email" class="form-control" />
+                <ValidationMessage For="(() => Customer.Email)" />
+            }
+            else
+            {
+                <InputText id="email" @bind-Value="Customer.Email" readonly class="form-control" />
+                <ValidationMessage For="(() => Customer.Email)" />
+            }
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="firstName" class="col-md-2 col-form-label">
+            First Name:
+        </label>
+        <div class="col-md-8">
+            <InputText id="firstName" @bind-Value="Customer.FirstName" class="form-control" />
+            <ValidationMessage For="(() => Customer.FirstName)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="lastName" class="col-md-2 col-form-label">
+            Last Name:
+        </label>
+        <div class="col-md-8">
+            <InputText id="lastName" @bind-Value="Customer.LastName" class="form-control" />
+            <ValidationMessage For="(() => Customer.LastName)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="address" class="col-md-2 col-form-label">
+            Address:
+        </label>
+        <div class="col-md-8">
+            <InputText id="address" @bind-Value="Customer.Address" class="form-control" />
+            <ValidationMessage For="(() => Customer.Address)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="city" class="col-md-2 col-form-label">
+            City:
+        </label>
+        <div class="col-md-8">
+            <InputText id="city" @bind-Value="Customer.City" class="form-control" />
+            <ValidationMessage For="(() => Customer.City)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="state" class="col-md-2 col-form-label">
+            State:
+        </label>
+        <div class="col-md-8">
+            <InputSelect id="state" @bind-Value="Customer.State" class="form-control">
+                <option value="">Select a State</option>
+                @foreach (var state in States)
+                {
+                    <option value="@state.StateCode">@state.StateName</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="(() => Customer.State)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="zipcode" class="col-md-2 col-form-label">
+            Zip Code:
+        </label>
+        <div class="col-md-8">
+            <InputText id="zipcode" @bind-Value="Customer.ZipCode" class="form-control" />
+            <ValidationMessage For="(() => Customer.ZipCode)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="phoneNumber" class="col-md-2 col-form-label">
+            Phone Number:
+        </label>
+        <div class="col-md-8">
+            <InputText id="phoneNumber" @bind-Value="Customer.PhoneNumber" class="form-control" />
+            <ValidationMessage For="(() => Customer.PhoneNumber)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">@ButtonText</button>
+        <a href="/customers/customerList" class="btn btn-primary">Cancel</a>
+    </div>
+</EditForm>

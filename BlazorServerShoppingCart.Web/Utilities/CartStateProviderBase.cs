@@ -9,6 +9,12 @@ namespace BlazorServerShoppingCart.Web.Utilities
 {
     public class CartStateProviderBase : ComponentBase
     {
+        //The code here followed Steve Sanderson tutorial on State Management at 
+        //https://gist.github.com/SteveSandersonMS/ba16f6bb6934842d78c89ab5314f4b56
+
+        //This component deals with the loading phase by not rendering its child content
+        //until loading is completed.
+
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
