@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace BlazorServerShoppingCart.Web.Pages.Customers
 {
-    public class CustomerListBase : ComponentBase
+    public class CustomerDetailBase : ComponentBase
     {
         [Inject]
         public ICustomerViewModel CustomerViewModel { get; set; }
 
-        protected IList<Customer> Customers { get; set; } = new List<Customer>();
-
         [Parameter]
-        public string CustomerAdded { get; set; }
+        public string Email { get; set; }
+
+        public Customer Customer { get; set; } = new();
 
         protected override async Task OnInitializedAsync()
         {
-            Customers = await CustomerViewModel.GetAllCustomers();
+            Customer = await CustomerViewModel.GetCustomer(Email);
         }
     }
 }

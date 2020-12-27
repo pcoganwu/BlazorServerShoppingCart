@@ -1,0 +1,33 @@
+﻿@page "/customers/customerDetail/{email}"
+@inherits CustomerDetailBase
+
+<div class="mt-5 col-md-8 divCenter">
+    @if (Customer == null || Customer.StateNavigation == null)
+    {
+        <div class="spinner"></div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-danger text-center"><b>@($"Details for {Customer.FirstName} {Customer.LastName}")</b></h3>
+            </div>
+            <div class="card-body">
+                <h5><b>Email Address: </b>@Customer.Email</h5>
+                <h5><b>First Name: </b>@Customer.FirstName</h5>
+                <h5><b>Last Name: </b>@Customer.LastName</h5>
+                <h5><b>Address: </b>@Customer.Address</h5>
+                <h5><b>CIty: </b>@Customer.City</h5>
+                <h5><b>Zip Code: </b>@Customer.ZipCode</h5>
+                <h5><b>State: </b>@Customer.StateNavigation.StateName</h5>
+                <h5><b>Phone Number: </b>@Customer.PhoneNumber</h5>
+            </div>
+            <div class="card-footer">
+                <EditForm Model="Customer">
+                    <a href="@($"/customers/editCustomer/{Customer.Email}")" class="btn btn-danger">Edit</a>
+                    <a href="/customers/customerList" class="btn btn-primary">Cancel</a>
+                </EditForm>
+            </div>
+        </div>
+    }
+</div>
