@@ -52,7 +52,8 @@
         </div>
         <div>
             <button type="submit" class="btn btn-primary" style="width:115px">Add To Cart </button>
-            <a href="/" class="btn btn-primary" style="width:115px">Cancel</a>
+            <button type="button" class="btn btn-primary" style="width:115px" @onclick="GoToCart">Go to Cart</button>
+            <span class="text-danger"> <b>@Message</b></span>
         </div>
     </div>
 </EditForm>

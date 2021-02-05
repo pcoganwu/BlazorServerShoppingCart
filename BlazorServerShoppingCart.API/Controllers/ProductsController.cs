@@ -38,7 +38,7 @@ namespace BlazorServerShoppingCart.API.Controllers
 
         // GET api/<ProductsController>/5
         // GET api/<Products>/5
-        [HttpGet("{productId}")]
+        [HttpGet("{GetProduct}/{productId}")]
         public async Task<ActionResult<Product>> GetProduct(string productId)
         {
             try
@@ -49,6 +49,20 @@ namespace BlazorServerShoppingCart.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from database");
             }
+        }
+
+        [HttpGet("{ProductCountByCategory}")]
+        public async Task<ActionResult<ProductCount>> ProductCountByCategory()
+        {
+            try
+            {
+                return Ok(await _productRepository.ProductCountByCategory());
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from database");
+            }
+
         }
 
         // POST api/<ProductsController>

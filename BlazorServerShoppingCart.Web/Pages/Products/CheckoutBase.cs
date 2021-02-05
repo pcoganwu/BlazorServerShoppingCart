@@ -17,11 +17,20 @@ namespace BlazorServerShoppingCart.Web.Pages.Products
         [Inject]
         public IInvoiceDataViewModel _InvoiceDataViewModel { get; set; }
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         public IList<InvoiceDatum> TAX { get; set; } = new List<InvoiceDatum>();
 
         protected override async Task OnInitializedAsync()
         {
             TAX = await _InvoiceDataViewModel.InvoiceData();
+        }
+
+        protected void GoToCart()
+        {
+            NavigationManager.NavigateTo($"/CartItem/" +
+            $"{(CartStateProvider.ShoppingCart.Items.FirstOrDefault()).ProductViewModel.ProductId}");
         }
 
     }

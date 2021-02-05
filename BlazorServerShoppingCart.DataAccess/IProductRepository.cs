@@ -13,5 +13,6 @@ namespace BlazorServerShoppingCart.DataAccess
         Task<Product> AddProduct(Product newProduct);
         Task<Product> UpdateProduct(Product updatedProduct);
         Task<Product> DeleteProduct(string productId);
+        Task<List<ProductCount>> ProductCountByCategory();
     }
 }
