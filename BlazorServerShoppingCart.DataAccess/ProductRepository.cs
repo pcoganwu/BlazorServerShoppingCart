@@ -46,6 +46,18 @@ namespace BlazorServerShoppingCart.DataAccess
             return await _appDbContext.Products.Include(c => c.Category).FirstOrDefaultAsync(p => p.ProductId == productId);
         }
 
+        public async Task<List<ProductCount>> ProductCountByCategory()
+        {
+            return (from c in await _appDbContext.Categories.ToListAsync()
+                    join product in await _appDbContext.Products.ToListAsync()
+                    on c.CategoryId equals product.CategoryId into eGroup
+                    select new ProductCount
+                    {
+                        Catagory = c.ShortName,
+                        Count = eGroup.Count()
+                    }).ToList();
+        }
+
         public async Task<Product> UpdateProduct(Product updatedProduct)
         {
             var product = await _appDbContext.Products.FirstOrDefaultAsync(p => p.ProductId == updatedProduct.ProductId);

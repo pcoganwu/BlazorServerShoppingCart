@@ -1,7 +1,7 @@
 ﻿@page "/cartItem/{productId}/{quantity:int?}"
 @inherits CartItemBase
 
-<h3 class="text-center">Your Shooping Cart</h3>
+<h3 class="text-center text-primary"><b>Your Shopping Cart</b></h3>
 
 @if (CartStateProvider.ShoppingCart.Items is not null && CartStateProvider.ShoppingCart.Items.Count > 0)
 {

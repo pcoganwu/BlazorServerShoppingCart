@@ -1,4 +1,5 @@
 ﻿using BlazorServerShoppingCart.Models.Domain;
+using BlazorServerShoppingCart.Web.Utilities;
 using BlazorServerShoppingCart.Web.ViewModels;
 using Microsoft.AspNetCore.Components;
 using System;
@@ -13,8 +14,13 @@ namespace BlazorServerShoppingCart.Web.Pages.Products
         [Inject]
         public IProductViewModel _ProductViewModel { get; set; }
 
+        [CascadingParameter]
+        protected CartStateProvider CartStateProvider { get; set; }
+
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+
+        public string Message { get; set; } = string.Empty;
 
         [Parameter]
         public string ProductId { get; set; }
@@ -37,6 +43,19 @@ namespace BlazorServerShoppingCart.Web.Pages.Products
         protected void Handle_Submit()
         {
             NavigationManager.NavigateTo($"/CartItem/{ProductViewModel.ProductId}/{ProductViewModel.Quantity}");
+        }
+
+        protected void GoToCart()
+        {
+            if (CartStateProvider.ShoppingCart.Items.Count > 0)
+            {
+                NavigationManager.NavigateTo($"/CartItem/" +
+               $"{(CartStateProvider.ShoppingCart.Items.FirstOrDefault()).ProductViewModel.ProductId}");
+            }
+            else
+            {
+                Message = "Your Cart is empty.";
+            }
         }
     }
 }

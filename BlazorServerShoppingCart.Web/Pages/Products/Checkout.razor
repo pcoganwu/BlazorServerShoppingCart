@@ -1,7 +1,7 @@
 ﻿@page "/products/checkout"
 @inherits CheckoutBase
 
-<h3 class="text-center mt-3 mb-3">You Purchase</h3>
+<h3 class="text-center text-primary mt-3 mb-3"><b>Your Purchase</b></h3>
 <hr />
 
 @if (TAX == null)
@@ -42,6 +42,10 @@ else
         </TableTemplate>
         <div>
             <h5 class="float-md-right">Total: @((CartStateProvider.ShoppingCart.Total * (1 + tax.SalesTax)).ToString("c"))</h5>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" style="width:140px" @onclick="GoToCart">Go back to cart</button>
+            <a href="#" class="btn btn-primary" style="width:140px">Pay now</a>
         </div>
     }
 }

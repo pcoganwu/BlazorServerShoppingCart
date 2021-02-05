@@ -62,7 +62,7 @@ namespace BlazorServerShoppingCart.Web.ViewModels
 
         public async Task<Product> GetProduct(string productId)
         {
-            return await _httpClient.GetJsonAsync<Product>($"api/products/{productId}");
+            return await _httpClient.GetJsonAsync<Product>($"api/products/GetProduct/{productId}");
         }
 
         public async Task<Product> UpdateProduct(Product product)
@@ -89,6 +89,11 @@ namespace BlazorServerShoppingCart.Web.ViewModels
             Category = productViewModel.Category;
 
             return productViewModel;
+        }
+
+        public async Task<IList<ProductCount>> ProductCountByCategory()
+        {
+            return await _httpClient.GetJsonAsync<List<ProductCount>>("api/products/ProductCountByCategory");
         }
 
         //Mapping ProductViewModel to Product from the database

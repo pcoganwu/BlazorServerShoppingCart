@@ -1,0 +1,19 @@
+﻿@inherits ProductCountByCategoryBase
+
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Category</th>
+            <th>Product Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var productCount in ProductCount)
+        {
+            <tr>
+                <td>@productCount.Catagory</td>
+                <td>@productCount.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>
