@@ -28,8 +28,4 @@
     <ProjectReference Include="..\BlazorServerShoppingCart.Models\BlazorServerShoppingCart.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\products\" />
-  </ItemGroup>
-
 </Project>
